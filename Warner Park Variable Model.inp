@@ -1,0 +1,606 @@
+[TITLE]
+;;Project Title/Notes
+Warner Park
+
+[OPTIONS]
+;;Option             Value
+FLOW_UNITS           CFS
+INFILTRATION         HORTON
+FLOW_ROUTING         DYNWAVE
+LINK_OFFSETS         DEPTH
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+
+START_DATE           03/16/2021
+START_TIME           00:00:00
+REPORT_START_DATE    03/16/2021
+REPORT_START_TIME    00:00:00
+END_DATE             03/17/2021
+END_TIME             00:00:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          01:00:00
+WET_STEP             00:05:00
+DRY_STEP             01:00:00
+ROUTING_STEP         0:00:30 
+RULE_STEP            01:00:00
+
+INERTIAL_DAMPING     PARTIAL
+NORMAL_FLOW_LIMITED  BOTH
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0.75
+LENGTHENING_STEP     0
+MIN_SURFAREA         12.566
+MAX_TRIALS           8
+HEAD_TOLERANCE       0.005
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              1
+
+[EVAPORATION]
+;;Data Source    Parameters
+;;-------------- ----------------
+CONSTANT         0.0
+DRY_ONLY         NO
+
+[RAINGAGES]
+;;Name           Format    Interval SCF      Source    
+;;-------------- --------- ------ ------ ----------
+R1               VOLUME    1:00     0        FILE       "D:\SWMM\Model Data Resources\Carmen 100 Year 24 Hours Storm Event.dat" STA01      IN   
+
+[SUBCATCHMENTS]
+;;Name           Rain Gage        Outlet           Area     %Imperv  Width    %Slope   CurbLen  SnowPack        
+;;-------------- ---------------- ---------------- -------- -------- -------- -------- -------- ----------------
+Sub(UnC)         R1               Pond(1)          4.788    73.34    525      0.5      0                        
+Sub(1)P(1)       R1               Park(1)          3.799    85.98    500      1.75     0                        
+Sub(2)P(1)       R1               Pond(2)          3.139    55.45    500      2.3      0                        
+Sub(3)P(1)       R1               Pond(2)          2.065    9.0      500      1.6      0                        
+Sub(4)P(2)       R1               J4               2.518    8.55     500      1.3      0                        
+Sub(5)P(2)       R1               J5               4.921    41.65    500      1.3      0                        
+Sub(6)P(2)       R1               J6               0.845    3.84     500      1.3      0                        
+Sub(7)P(2)       R1               Pond(3)          5.287    2.18     500      1.7      0                        
+Sub(8)P(2)       R1               J8               0.147    0        500      1.7      0                        
+Sub(9)P(2)       R1               J9               0.41     100      500      0.5      0                        
+Sub(10)P(2)      R1               J10              0.276    100      500      0.5      0                        
+Sub(11)P(2)      R1               J11              0.208    100      500      0.5      0                        
+
+[SUBAREAS]
+;;Subcatchment   N-Imperv   N-Perv     S-Imperv   S-Perv     PctZero    RouteTo    PctRouted 
+;;-------------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+Sub(UnC)         0.011      0.17       0.07       0.15       100        PERVIOUS   100       
+Sub(1)P(1)       0.011      0.2        0.07       0.05       25         OUTLET    
+Sub(2)P(1)       0.011      0.2        0.07       0.15       100        OUTLET    
+Sub(3)P(1)       0.011      0.2        0.07       0.15       100        OUTLET    
+Sub(4)P(2)       0.011      0.2        0          0.15       100        OUTLET    
+Sub(5)P(2)       0.011      0.2        0.07       0.05       50         OUTLET    
+Sub(6)P(2)       0.011      0.2        0.07       0.15       100        OUTLET    
+Sub(7)P(2)       0.011      0.2        0.07       0.15       100        OUTLET    
+Sub(8)P(2)       0.01       0.1        0.05       0.05       25         OUTLET    
+Sub(9)P(2)       0.01       0.1        0.05       0.05       25         OUTLET    
+Sub(10)P(2)      0.01       0.1        0.05       0.05       25         OUTLET    
+Sub(11)P(2)      0.01       0.1        0.05       0.05       25         OUTLET    
+
+[INFILTRATION]
+;;Subcatchment   Param1     Param2     Param3     Param4     Param5    
+;;-------------- ---------- ---------- ---------- ---------- ----------
+Sub(UnC)         1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(1)P(1)       1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(2)P(1)       1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(3)P(1)       1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(4)P(2)       1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(5)P(2)       1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(6)P(2)       1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(7)P(2)       1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(8)P(2)       1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(9)P(2)       1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(10)P(2)      1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+Sub(11)P(2)      1          0.01       0.25       7          0          MODIFIED_GREEN_AMPT
+
+[LID_CONTROLS]
+;;Name           Type/Layer Parameters
+;;-------------- ---------- ----------
+Park(1)          BC
+Park(1)          SURFACE    1.5        0.5        0.03       1.0        5         
+Park(1)          SOIL       2          0.5        0.2        0.1        0.5        10.0       3.5       
+Park(1)          STORAGE    0.3        0.75       0.5        0         
+Park(1)          DRAIN      0          0.5        6          6          0          0                    
+
+VegSwale         VS
+VegSwale         SURFACE    36.0       0.2        0.033      1.0        5         
+
+[LID_USAGE]
+;;Subcatchment   LID Process      Number  Area       Width      InitSat    FromImp    ToPerv     RptFile                  DrainTo          FromPerv  
+;;-------------- ---------------- ------- ---------- ---------- ---------- ---------- ---------- ------------------------ ---------------- ----------
+Sub(UnC)         Park(1)          2       9375       10         0          0          0          *                        Pond(1)          0               
+Sub(4)P(2)       VegSwale         1       22000      8          0          0          0          *                        J4               20              
+
+[JUNCTIONS]
+;;Name           Elevation  MaxDepth   InitDepth  SurDepth   Aponded   
+;;-------------- ---------- ---------- ---------- ---------- ----------
+P(1)_Outlet      663        3          0          4          0         
+Park(1)          664        3          0          4          0         
+Park(1)_Outlet   662        3          0          4          0         
+P(2)_Inlet       662        3          0          4          0         
+P(2)_Outlet      661        3          0          4          0         
+Junc(1)          661        3          0          4          0         
+J5               662        3          0          4          0         
+J4               662        2          0          4          0         
+J6               662        3          0          4          0         
+Junc(2)          660        3          0          4          0         
+P(3)_Inlet       660        3          0          4          0         
+J9               670        3          0          4          0         
+J9_Out           664        3          0          4          0         
+J10              670        3          0          4          0         
+J10_Out          667        3          0          4          0         
+J11              670        3          0          4          0         
+J11_Out          669        3          0          4          0         
+J8               670        3          0          4          0         
+J8_Out           667        3          0          4          0         
+Channel(3)       668        3          0          6          0         
+Channel(2)       666        3          0          6          0         
+Channel(1)       665        3          0          6          0         
+
+[OUTFALLS]
+;;Name           Elevation  Type       Stage Data       Gated    Route To        
+;;-------------- ---------- ---------- ---------------- -------- ----------------
+Outfall          662        FREE                        YES                      
+
+[STORAGE]
+;;Name           Elev.    MaxDepth   InitDepth  Shape      Curve Name/Params            N/A      Fevap    Psi      Ksat     IMD     
+;;-------------- -------- ---------- ----------- ---------- ---------------------------- -------- --------          -------- --------
+Pond(1)          660      8          5          TABULAR    Pond(1)                      8        0       
+Pond(2)          658      10         5          TABULAR    Pond(2)                      12       0       
+Pond(3)          655      12         8          TABULAR    Pond(3)                      13       0       
+
+[CONDUITS]
+;;Name           From Node        To Node          Length     Roughness  InOffset   OutOffset  InitFlow   MaxFlow   
+;;-------------- ---------------- ---------------- ---------- ---------- ---------- ---------- ---------- ----------
+P(1)_Out-Park(1)_Out P(1)_Outlet      Park(1)_Outlet   150        0.013      0.01       0.01       0          0         
+Park(1)-Park(1)_Out Park(1)          Park(1)_Outlet   20         0.013      0.01       0.01       0          0         
+Park(1)_Out-P(2)_In Park(1)_Outlet   P(2)_Inlet       245        0.013      0.01       0.01       0          0         
+P(2)_In-Pond(2)  P(2)_Inlet       Pond(2)          10         0.01       0          6.0        0          0         
+P(1)_Outlet-Junc(1) P(2)_Outlet      Junc(1)          445        0.013      0.01       0.01       0          0         
+J5-Junc(1)       J5               Junc(1)          180        0.013      0.01       0.01       0          0         
+Junc(1)-Junc(2)  Junc(1)          Junc(2)          200        0.013      0.01       0.01       0          0         
+J4-Junc(2)       J4               Junc(2)          255        0.013      0.01       0.01       0          0         
+J6-Junc(2)       J6               Junc(2)          170        0.013      0.01       0.01       0          0         
+Junc(2)-P(2)_Inlet Junc(2)          P(3)_Inlet       400        0.013      0.01       0.01       0          0         
+Pond(3)-P(3)_Out P(3)_Inlet       Pond(3)          25         0.01       0          5          0          0         
+J9-J9_Out        J9               J9_Out           100        0.013      0.01       0.01       0          0         
+J9_Out-Pond(3)   J9_Out           Pond(3)          110        0.033      0          10         0          0         
+J10-J10_Out      J10              J10_Out          35         0.013      0.01       0.01       0          0         
+J11-J11_Out      J11              J11_Out          55         0.013      0.01       0.01       0          0         
+J8-J8_Out        J8               J8_Out           60         0.013      0.01       0.01       0          0         
+J11_Out-Ch(3)    J11_Out          Channel(3)       50         0.033      0          0          0          0         
+*Ch(3)           Channel(3)       Channel(2)       130        0.01       0          0          0          0         
+*Ch(2)           Channel(2)       Channel(1)       100        0.01       0          0          0          0         
+*20              J10_Out          Channel(1)       50         0.033      0          0          0          0         
+*21              J8_Out           Channel(2)       50         0.01       0          0          0          0         
+*Ch(1)           Channel(1)       Pond(3)          220        0.01       0          11.0       0          0         
+
+[PUMPS]
+;;Name           From Node        To Node          Pump Curve       Status   Sartup Shutoff 
+;;-------------- ---------------- ---------------- ---------------- ------ -------- --------
+Pump(1)          Pond(1)          P(1)_Outlet      Pump(1)General   ON       1        0       
+Pump(2)          Pond(2)          P(2)_Outlet      Pump(2)General   ON       1        0       
+Pump(3)          Pond(3)          Outfall          Pump(3)General   ON       3.1      3       
+
+[XSECTIONS]
+;;Link           Shape        Geom1            Geom2      Geom3      Geom4      Barrels    Culvert   
+;;-------------- ------------ ---------------- ---------- ---------- ---------- ---------- ----------
+P(1)_Out-Park(1)_Out CIRCULAR     2                0          0          0          1                    
+Park(1)-Park(1)_Out CIRCULAR     2                0          0          0          1                    
+Park(1)_Out-P(2)_In CIRCULAR     2                0          0          0          1                    
+P(2)_In-Pond(2)  CIRCULAR     2                0          0          0          1                    
+P(1)_Outlet-Junc(1) CIRCULAR     3                0          0          0          1                    
+J5-Junc(1)       CIRCULAR     2                0          0          0          1                    
+Junc(1)-Junc(2)  CIRCULAR     3                0          0          0          1                    
+J4-Junc(2)       CIRCULAR     2                0          0          0          1                    
+J6-Junc(2)       CIRCULAR     2                0          0          0          1                    
+Junc(2)-P(2)_Inlet CIRCULAR     3                0          0          0          1                    
+Pond(3)-P(3)_Out CIRCULAR     3                0          0          0          1                    
+J9-J9_Out        CIRCULAR     2                0          0          0          1                    
+J9_Out-Pond(3)   CIRCULAR     2                0          0          0          1                    
+J10-J10_Out      CIRCULAR     2                0          0          0          1                    
+J11-J11_Out      CIRCULAR     2                0          0          0          1                    
+J8-J8_Out        CIRCULAR     2                0          0          0          1                    
+J11_Out-Ch(3)    CIRCULAR     2                0          0          0          1                    
+*Ch(3)           CIRCULAR     2                0          0          0          1                    
+*Ch(2)           CIRCULAR     2                0          0          0          1                    
+*20              CIRCULAR     2                0          0          0          1                    
+*21              CIRCULAR     2                0          0          0          1                    
+*Ch(1)           CIRCULAR     2                0          0          0          1                    
+
+[LOSSES]
+;;Link           Kentry     Kexit      Kavg       Flap Gate  Seepage   
+;;-------------- ---------- ---------- ---------- ---------- ----------
+P(1)_Outlet-Junc(1) 0          0          0          YES        0         
+J9_Out-Pond(3)   0          0          0          YES        0         
+*Ch(1)           0          0          0          YES        0         
+
+[CURVES]
+;;Name           Type       X-Value    Y-Value   
+;;-------------- ---------- ---------- ----------
+;Stay at condition till start of RainEvent
+RainEventFuturePump(1) Pump4      0          0         
+RainEventFuturePump(1)            1          0.5       
+RainEventFuturePump(1)            2          1.0       
+RainEventFuturePump(1)            3          1.5       
+RainEventFuturePump(1)            4          2.0       
+RainEventFuturePump(1)            5          3.5       
+RainEventFuturePump(1)            6          4.5       
+RainEventFuturePump(1)            7          7.8       
+RainEventFuturePump(1)            8          9.5       
+;
+;Stay at this condition till start of RainEvent
+RainEventFuturePump(2) Pump4      0          0         
+RainEventFuturePump(2)            1          0.5       
+RainEventFuturePump(2)            2          1.0       
+RainEventFuturePump(2)            3          1.5       
+RainEventFuturePump(2)            4          2.0       
+RainEventFuturePump(2)            5          3.0       
+RainEventFuturePump(2)            6          8.0       
+RainEventFuturePump(2)            7          12        
+RainEventFuturePump(2)            8          18        
+;
+RainEventFuturePump(3) Pump4      3          0         
+RainEventFuturePump(3)            4          1.5       
+RainEventFuturePump(3)            5          3.0       
+RainEventFuturePump(3)            6          4.5       
+RainEventFuturePump(3)            7          6         
+RainEventFuturePump(3)            8          10.5      
+RainEventFuturePump(3)            9          20        
+RainEventFuturePump(3)            10         40        
+;
+;If get to 6.01, then change to Pump(1)General
+MinDepthEventP(1) Pump4      0          0         
+MinDepthEventP(1)            1          0         
+MinDepthEventP(1)            2          0         
+MinDepthEventP(1)            3          0         
+MinDepthEventP(1)            4          0         
+MinDepthEventP(1)            5          0         
+MinDepthEventP(1)            5.5        1.0       
+MinDepthEventP(1)            6          1.5       
+;
+;If reach 5.01, then return to P(2)General
+MinDepthEventP(2) Pump4      0          0         
+MinDepthEventP(2)            1          0         
+MinDepthEventP(2)            2          0         
+MinDepthEventP(2)            3          0         
+MinDepthEventP(2)            4          0         
+MinDepthEventP(2)            4.5        0.8       
+MinDepthEventP(2)            5          1.2       
+;
+;If reach 7.5, then return to P(3)General
+MinDepthEventP(3) Pump4      3          0         
+MinDepthEventP(3)            4          0         
+MinDepthEventP(3)            5          0         
+MinDepthEventP(3)            6          0         
+MinDepthEventP(3)            6.5        0.23      
+MinDepthEventP(3)            7.5        0.5       
+;
+;If reach depth of 5.00, return to GeneralPump(1)
+MaxDepthEventPump(1) Pump1      5          0         
+MaxDepthEventPump(1)            5.5        1.35      
+MaxDepthEventPump(1)            6          4.5       
+MaxDepthEventPump(1)            6.5        6         
+MaxDepthEventPump(1)            7          8         
+MaxDepthEventPump(1)            7.5        12        
+MaxDepthEventPump(1)            8          14        
+;
+;If reach 4.00, then return to Pump(2)General
+MaxDepthEventPump(2) Pump4      4          0         
+MaxDepthEventPump(2)            4.5        2         
+MaxDepthEventPump(2)            5          4         
+MaxDepthEventPump(2)            5.5        7         
+MaxDepthEventPump(2)            6          9         
+MaxDepthEventPump(2)            6.5        12        
+MaxDepthEventPump(2)            7          13        
+MaxDepthEventPump(2)            8          15        
+MaxDepthEventPump(2)            9          19        
+MaxDepthEventPump(2)            10         23        
+;
+;If reach 6.00, then return to GeneralPump(3)
+MaxDepthEventPump(3) Pump4      6          0         
+MaxDepthEventPump(3)            7          5         
+MaxDepthEventPump(3)            8          15        
+MaxDepthEventPump(3)            9          40        
+MaxDepthEventPump(3)            10         55        
+MaxDepthEventPump(3)            11         60        
+MaxDepthEventPump(3)            12         80        
+;
+Pump(1)General   Pump4      0          0         
+Pump(1)General              1          0.01      
+Pump(1)General              2          0.01      
+Pump(1)General              3          0.01      
+Pump(1)General              4          0.02      
+Pump(1)General              5          0.03      
+Pump(1)General              5.5        2.6       
+Pump(1)General              6          4.7       
+Pump(1)General              6.5        6         
+Pump(1)General              7          7.8       
+;
+Pump(2)General   Pump4      0          0         
+Pump(2)General              1          0.02      
+Pump(2)General              2          0.02      
+Pump(2)General              3          0.02      
+Pump(2)General              4          0.09      
+Pump(2)General              4.5        0.85      
+Pump(2)General              5          3.11      
+Pump(2)General              5.5        6.37      
+Pump(2)General              6          9.25      
+Pump(2)General              6.5        11.49     
+Pump(2)General              7          13.38     
+;
+Pump(3)General   Pump4      3          0         
+Pump(3)General              4          0.03      
+Pump(3)General              5          0.03      
+Pump(3)General              6          0.09      
+Pump(3)General              6.5        0.72      
+Pump(3)General              7          1.65      
+Pump(3)General              7.5        2.35      
+Pump(3)General              8          10.41     
+Pump(3)General              8.5        19.86     
+Pump(3)General              9          41.75     
+;
+Pond(1)          Storage    1          14500     
+Pond(1)                     2          14500     
+Pond(1)                     3          14500     
+Pond(1)                     4          14500     
+Pond(1)                     5          14500     
+Pond(1)                     6          14500     
+Pond(1)                     7          14500     
+Pond(1)                     8          14500     
+Pond(1)                     9          14500     
+Pond(1)                     10         14500     
+;
+Pond(2)          Storage    1          3983      
+Pond(2)                     2          6767      
+Pond(2)                     3          11336     
+Pond(2)                     4          14533     
+Pond(2)                     5          17202     
+;
+Pond(3)          Storage    1          15630     
+Pond(3)                     2          23266     
+Pond(3)                     3          33431     
+Pond(3)                     4          41741     
+Pond(3)                     5          48690     
+Pond(3)                     6          55193     
+Pond(3)                     7          58261     
+Pond(3)                     8          61314     
+Pond(3)                     9          62567     
+Pond(3)                     10         65603     
+
+[TIMESERIES]
+;;Name           Date       Time       Value     
+;;-------------- ---------- ---------- ----------
+TS1                         1          12        
+TS1                         2          12        
+TS1                         3          12        
+TS1                         4          12        
+TS1                         5          12        
+TS1                         6          12        
+TS1                         7          12        
+TS1                         8          12        
+TS1                         9          12        
+TS1                         10         12        
+TS1                         11         12        
+TS1                         12         12        
+TS1                         13         12        
+TS1                         14         12        
+TS1                         15         12        
+TS1                         16         12        
+TS1                         17         12        
+TS1                         18         12        
+TS1                         19         12        
+TS1                         20         12        
+TS1                         21         12        
+TS1                         22         12        
+TS1                         24         12        
+
+[REPORT]
+;;Reporting Options
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[MAP]
+DIMENSIONS -283.505 0.000 10283.505 10000.000
+Units      None
+
+[COORDINATES]
+;;Node           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+P(1)_Outlet      6193.733           7333.795          
+Park(1)          6451.243           6727.749          
+Park(1)_Outlet   6313.809           6714.660          
+P(2)_Inlet       5825.535           5748.663          
+P(2)_Outlet      5409.483           5502.874          
+Junc(1)          4658.764           4094.828          
+J5               3918.822           4432.471          
+J4               5585.489           3491.379          
+J6               4859.914           2772.989          
+Junc(2)          4335.489           3290.230          
+P(3)_Inlet       2946.676           2396.122          
+J9               2156.414           1799.738          
+J9_Out           2457.461           1989.529          
+J10              3092.277           1361.257          
+J10_Out          3236.257           1472.513          
+J11              4368.455           804.974           
+J11_Out          4355.366           1007.853          
+J8               3910.340           2035.340          
+J8_Out           3871.073           1786.649          
+Channel(3)       4304.415           1260.751          
+Channel(2)       3787.487           1507.193          
+Channel(1)       3378.754           1669.484          
+Outfall          2383.261           2966.954          
+Pond(1)          5813.712           8206.371          
+Pond(2)          5625.000           5545.977          
+Pond(3)          2794.321           2271.468          
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+P(1)_Out-Park(1)_Out 6336.715           6966.623          
+P(1)_Outlet-Junc(1) 5104.167           5387.931          
+J6-Junc(2)       4443.247           2981.322          
+Junc(2)-P(2)_Inlet 3890.086           3067.529          
+Junc(2)-P(2)_Inlet 2941.810           2392.241          
+J9-J9_Out        2005.890           1917.539          
+*Ch(1)           3228.484           1933.959          
+Pump(3)          2717.070           2637.766          
+
+[Polygons]
+;;Subcatchment   X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+Sub(UnC)         5003.463           9459.834          
+Sub(UnC)         4754.155           9189.751          
+Sub(UnC)         4428.670           8455.679          
+Sub(UnC)         4400.970           7853.186          
+Sub(UnC)         5806.787           7243.767          
+Sub(UnC)         6153.047           7403.047          
+Sub(UnC)         6367.729           7354.571          
+Sub(UnC)         6963.296           8670.360          
+Sub(UnC)         5065.789           9501.385          
+Sub(1)P(1)       5062.173           9509.162          
+Sub(1)P(1)       6960.079           8651.832          
+Sub(1)P(1)       6364.529           7362.565          
+Sub(1)P(1)       6174.738           7401.832          
+Sub(1)P(1)       5808.246           7251.309          
+Sub(1)P(1)       5651.178           7303.665          
+Sub(1)P(1)       5670.812           7244.764          
+Sub(1)P(1)       5886.780           7192.408          
+Sub(1)P(1)       6285.995           6636.126          
+Sub(1)P(1)       7208.770           6256.545          
+Sub(1)P(1)       7941.754           8115.183          
+Sub(1)P(1)       7948.298           8219.895          
+Sub(1)P(1)       7562.173           8403.141          
+Sub(1)P(1)       7666.885           8710.733          
+Sub(1)P(1)       6776.832           9136.126          
+Sub(1)P(1)       6017.670           9476.440          
+Sub(1)P(1)       5304.319           9738.220          
+Sub(1)P(1)       5068.717           9515.707          
+Sub(2)P(1)       7197.949           6204.181          
+Sub(2)P(1)       6795.650           5248.721          
+Sub(2)P(1)       6515.478           5334.928          
+Sub(2)P(1)       6192.202           5514.526          
+Sub(2)P(1)       5883.294           5306.192          
+Sub(2)P(1)       5782.719           5277.457          
+Sub(2)P(1)       5631.857           5306.192          
+Sub(2)P(1)       5488.179           5356.480          
+Sub(2)P(1)       5308.582           5464.238          
+Sub(2)P(1)       5071.513           5665.388          
+Sub(2)P(1)       5243.926           5880.905          
+Sub(2)P(1)       5272.662           6455.618          
+Sub(2)P(1)       5674.961           7245.848          
+Sub(2)P(1)       5890.478           7195.560          
+Sub(2)P(1)       6292.777           6628.032          
+Sub(2)P(1)       7212.317           6247.284          
+Sub(3)P(1)       6756.466           5143.678          
+Sub(3)P(1)       6181.753           3965.517          
+Sub(3)P(1)       5089.799           4547.414          
+Sub(3)P(1)       5319.684           5431.034          
+Sub(3)P(1)       5334.052           5423.851          
+Sub(3)P(1)       5686.063           5287.356          
+Sub(3)P(1)       5786.638           5287.356          
+Sub(3)P(1)       5844.109           5287.356          
+Sub(3)P(1)       6188.937           5517.241          
+Sub(3)P(1)       6519.397           5323.276          
+Sub(3)P(1)       6792.385           5237.069          
+Sub(4)P(2)       6153.017           3879.310          
+Sub(4)P(2)       5844.109           3232.759          
+Sub(4)P(2)       5413.075           2521.552          
+Sub(4)P(2)       4831.178           2808.908          
+Sub(4)P(2)       4630.029           3268.678          
+Sub(4)P(2)       4637.213           3793.103          
+Sub(4)P(2)       4859.914           4317.529          
+Sub(4)P(2)       5089.799           4540.230          
+Sub(4)P(2)       6188.937           3951.149          
+Sub(5)P(2)       3877.618           2473.822          
+Sub(5)P(2)       4041.230           2801.047          
+Sub(5)P(2)       3897.251           3075.916          
+Sub(5)P(2)       3079.188           3488.220          
+Sub(5)P(2)       3458.770           3684.555          
+Sub(5)P(2)       4093.586           3481.675          
+Sub(5)P(2)       4139.398           3756.545          
+Sub(5)P(2)       3674.738           4070.681          
+Sub(5)P(2)       3393.325           4476.440          
+Sub(5)P(2)       3432.592           5255.236          
+Sub(5)P(2)       3700.916           5503.927          
+Sub(5)P(2)       4060.864           5739.529          
+Sub(5)P(2)       5049.084           5660.995          
+Sub(5)P(2)       5310.864           5458.115          
+Sub(5)P(2)       5088.351           4541.885          
+Sub(5)P(2)       4852.749           4306.283          
+Sub(5)P(2)       4636.780           3789.267          
+Sub(5)P(2)       4636.780           3259.162          
+Sub(5)P(2)       4839.660           2774.869          
+Sub(5)P(2)       4420.812           2630.890          
+Sub(5)P(2)       4172.120           2473.822          
+Sub(5)P(2)       4126.309           2356.021          
+Sub(5)P(2)       3857.984           2434.555          
+Sub(6)P(2)       5362.787           2456.897          
+Sub(6)P(2)       4931.753           1558.908          
+Sub(6)P(2)       4744.971           1688.218          
+Sub(6)P(2)       4443.247           2614.943          
+Sub(6)P(2)       4845.546           2794.540          
+Sub(6)P(2)       5420.259           2514.368          
+Sub(7)P(2)       3118.455           3462.042          
+Sub(7)P(2)       3903.796           3056.283          
+Sub(7)P(2)       4028.141           2807.592          
+Sub(7)P(2)       3707.461           2113.874          
+Sub(7)P(2)       3969.241           1976.440          
+Sub(7)P(2)       4165.576           2467.277          
+Sub(7)P(2)       4433.901           2617.801          
+Sub(7)P(2)       4446.990           2598.168          
+Sub(7)P(2)       4748.037           1675.393          
+Sub(7)P(2)       4924.738           1551.047          
+Sub(7)P(2)       4924.738           1498.691          
+Sub(7)P(2)       4590.969           746.073           
+Sub(7)P(2)       3026.832           1465.969          
+Sub(7)P(2)       2994.110           1714.660          
+Sub(7)P(2)       2679.974           1721.204          
+Sub(7)P(2)       2261.126           1956.806          
+Sub(7)P(2)       2045.157           1937.173          
+Sub(7)P(2)       2090.969           2441.099          
+Sub(7)P(2)       2195.681           2846.859          
+Sub(7)P(2)       2365.838           3075.916          
+Sub(7)P(2)       2464.005           3128.272          
+Sub(7)P(2)       3092.277           3501.309          
+Sub(8)P(2)       3838.351           2382.199          
+Sub(8)P(2)       3720.550           2120.419          
+Sub(8)P(2)       3975.785           1976.440          
+Sub(8)P(2)       4126.309           2362.565          
+Sub(8)P(2)       3864.529           2441.099          
+Sub(9)P(2)       991.492            2185.864          
+Sub(9)P(2)       2077.880           1708.115          
+Sub(9)P(2)       2221.859           1832.461          
+Sub(9)P(2)       3020.288           1465.969          
+Sub(9)P(2)       2994.110           1714.660          
+Sub(9)P(2)       2673.429           1714.660          
+Sub(9)P(2)       2280.759           1956.806          
+Sub(9)P(2)       2045.157           1950.262          
+Sub(9)P(2)       1109.293           2290.576          
+Sub(9)P(2)       939.136            2205.497          
+Sub(10)P(2)      3085.733           1308.901          
+Sub(10)P(2)      3177.356           1400.524          
+Sub(10)P(2)      2228.403           1825.916          
+Sub(10)P(2)      2084.424           1714.660          
+Sub(10)P(2)      3066.099           1289.267          
+Sub(10)P(2)      3151.178           1393.979          
+Sub(11)P(2)      3190.445           1380.890          
+Sub(11)P(2)      4590.969           746.073           
+Sub(11)P(2)      4551.702           647.906           
+Sub(11)P(2)      3053.010           1282.723          
+Sub(11)P(2)      3157.723           1413.613          
+
+[SYMBOLS]
+;;Gage           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+R1               3566.754           6151.832          
+
